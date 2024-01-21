@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Archive {
-    static private List<Elemento> archivio = new ArrayList<>();
+    static public List<Elemento> archivio = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -20,32 +20,32 @@ public class Archive {
         Faker faker = new Faker();
         Random random = new Random();
 
-        for (int i = 0; i < 2; i++) {
-            if (random.nextBoolean()) {
-                // crea un libro
-                Libro libro = new Libro(
-                        faker.code().isbn10(),
-                        faker.book().title(),
-                        faker.number().numberBetween(200, 300),
-                        faker.number().numberBetween(1900, 2022),
-                        faker.book().author(),
-
-                        faker.book().publisher()
-                );
-                archivio.add(libro);
-            } else {
-                // crea una rivista
-                String periodicity = faker.options().option("SETTIMANALE", "MENSILE", "SEMESTRALE");
-                Rivista rivista = new Rivista(
-                        faker.code().isbn13(),
-                        faker.book().title(),
-                        Integer.parseInt(String.valueOf(faker.number().numberBetween(30, 50))),
-                        faker.number().numberBetween(1900, 2022),
-                        periodicity
-                );
-                archivio.add(rivista);
-            }
-        }
+        for (int i = 0; i < 5; i++) {
+    if (random.nextBoolean()) {
+        // crea un libro
+        String author = faker.book().author();
+        Libro libro = new Libro(
+                faker.code().isbn10(),
+                faker.book().title(),
+                faker.number().numberBetween(1900, 2022),
+                faker.number().numberBetween(200, 300),
+                author,
+                faker.book().genre()
+        );
+        archivio.add(libro);
+    } else {
+        // crea una rivista
+        String periodicity = faker.options().option("SETTIMANALE", "MENSILE", "SEMESTRALE");
+        Rivista rivista = new Rivista(
+                faker.code().isbn13(),
+                faker.book().title(),
+                faker.number().numberBetween(100, 200),
+                faker.number().numberBetween(1900, 2022),
+                periodicity
+        );
+        archivio.add(rivista);
+    }
+}
 
 
         System.out.println("Before elimination");

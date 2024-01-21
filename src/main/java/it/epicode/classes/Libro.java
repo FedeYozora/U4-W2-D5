@@ -1,7 +1,7 @@
 package it.epicode.classes;
 
 public class Libro extends Elemento {
-    private String autore;
+    private static String autore;
     private String genere;
 
     public Libro(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
@@ -10,7 +10,7 @@ public class Libro extends Elemento {
         this.genere = genere;
     }
 
-    public String getAutore() {
+    public static String getAutore() {
         return autore;
     }
 

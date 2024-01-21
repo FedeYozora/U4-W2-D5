@@ -1,4 +1,4 @@
-package it.epicode.utils;// package it.epicode.utils;
+package it.epicode.utils;
 
 import it.epicode.classes.Elemento;
 import it.epicode.classes.Libro;
@@ -9,9 +9,11 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static it.epicode.Archive.archivio;
+
 public class Catalogo {
 
-    private static List<Elemento> archivio = new ArrayList<>();
+
 
     // Remove an element from the archive by its ISBN
     public static void rimuoviElemento(String isbn) {
@@ -20,24 +22,38 @@ public class Catalogo {
 
     // Search for an element by its ISBN
     public static Elemento ricercaPerISBN(String isbn) {
-        return archivio.stream()
+        if (isbn != null) {
+         archivio.stream()
                 .filter(e -> e.getCodiceISBN().equals(isbn))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+
+            System.out.println("Titolo: " + Elemento.getTitolo());
+            System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+        } else {
+            System.out.println("Elemento non trovato.");
+        }
+        return null;
     }
 
     // Search for elements by their year of publication
     public static List<Elemento> ricercaPerAnnoPubblicazione(int year) {
-        return archivio.stream()
+         archivio.stream()
                 .filter(e -> e.getAnnoPubblicazione() == year)
                 .collect(Collectors.toList());
+        System.out.println("Titolo: " + Elemento.getTitolo());
+        System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+        return null;
     }
 
     // Search for elements by their author
     public static List<Elemento> ricercaPerAutore(String author) {
-        return archivio.stream()
-                .filter(e -> e instanceof Libro && ((Libro) e).getAutore().equals(author))
+         archivio.stream()
+                .filter(e -> e instanceof Libro && Libro.getAutore().equals(author))
                 .collect(Collectors.toList());
+        System.out.println("Titolo: " + Elemento.getTitolo());
+        System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+        System.out.println("Autore: " + Libro.getAutore());
+        return null;
     }
         public static void saveToDisk(List<Elemento> elements) throws IOException {
         StringBuilder toWrite = new StringBuilder();
@@ -79,8 +95,8 @@ public class Catalogo {
         if (productInfos.length == 6) {
             String codiceISBN = productInfos[0];
             String titolo = productInfos[1];
-            int annoPubblicazione = Integer.parseInt(productInfos[3]);
-            int numPagine = Integer.parseInt(productInfos[2]);
+            int annoPubblicazione = Integer.parseInt(productInfos[2]);
+            int numPagine = Integer.parseInt(productInfos[3]);
             String autore = "";
             String genere = "";
             if (productInfos[4].contains("@")) {
