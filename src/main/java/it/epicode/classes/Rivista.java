@@ -26,8 +26,8 @@ public class Rivista extends Elemento {
                 "periodicita=" + periodicita +
                 ", codiceISBN='" + codiceISBN + '\'' +
                 ", titolo='" + titolo + '\'' +
-                ", annoPubblicazione=" + annoPubblicazione +
-                ", numeroPagine=" + numeroPagine +
+                ", annoPubblicazione=" + numeroPagine +
+                ", numeroPagine=" + annoPubblicazione +
                 '}';
     }
 }

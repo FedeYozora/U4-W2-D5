@@ -28,7 +28,7 @@ public class Catalogo {
                 .findFirst();
 
             System.out.println("Titolo: " + Elemento.getTitolo());
-            System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+            System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
         } else {
             System.out.println("Elemento non trovato.");
         }
@@ -41,7 +41,7 @@ public class Catalogo {
                 .filter(e -> e.getAnnoPubblicazione() == year)
                 .collect(Collectors.toList());
         System.out.println("Titolo: " + Elemento.getTitolo());
-        System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+        System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
         return null;
     }
 
@@ -51,7 +51,7 @@ public class Catalogo {
                 .filter(e -> e instanceof Libro && Libro.getAutore().equals(author))
                 .collect(Collectors.toList());
         System.out.println("Titolo: " + Elemento.getTitolo());
-        System.out.println("Anno di pubblicazione: " + Elemento.getAnnoPubblicazione());
+        System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
         System.out.println("Autore: " + Libro.getAutore());
         return null;
     }
@@ -95,8 +95,8 @@ public class Catalogo {
         if (productInfos.length == 6) {
             String codiceISBN = productInfos[0];
             String titolo = productInfos[1];
-            int annoPubblicazione = Integer.parseInt(productInfos[2]);
-            int numPagine = Integer.parseInt(productInfos[3]);
+            int annoPubblicazione = Integer.parseInt(productInfos[3]);
+            int numPagine = Integer.parseInt(productInfos[2]);
             String autore = "";
             String genere = "";
             if (productInfos[4].contains("@")) {
@@ -110,8 +110,8 @@ public class Catalogo {
         } else if (productInfos.length == 5) {
             String codiceISBN = productInfos[0];
             String titolo = productInfos[1];
-            int annoPubblicazione = Integer.parseInt(productInfos[3]);
-            int numPagine = Integer.parseInt(productInfos[2]);
+            int annoPubblicazione = Integer.parseInt(productInfos[2]);
+            int numPagine = Integer.parseInt(productInfos[3]);
             String periodicita = productInfos[4];
             archivio.add(new Rivista(codiceISBN, titolo, annoPubblicazione, numPagine, periodicita));
         }

@@ -50,29 +50,30 @@ public class Archive {
 
         System.out.println("Before elimination");
         archivio.forEach(System.out::println);
-
+        System.out.println();
 
         Catalogo.rimuoviElemento(archivio.get(0).getCodiceISBN());
 
         System.out.println("After elimination");
         archivio.forEach(System.out::println);
-
+        System.out.println();
 
         System.out.println("Result of ISBN search");
         Catalogo.ricercaPerISBN(archivio.get(0).getCodiceISBN());
+        System.out.println();
 
         System.out.println("Result of year of Publication");
         Catalogo.ricercaPerAnnoPubblicazione(archivio.get(0).getAnnoPubblicazione());
-
+        System.out.println();
 
         System.out.println("Result of Author");
         Catalogo.ricercaPerAutore("author");
-
+        System.out.println();
 
         try {
-            System.out.println("Saved to disk");
+            System.out.println("Saved to Disk");
             Catalogo.saveToDisk(archivio);
-
+            System.out.println();
             System.out.println("Read from Disk");
            Catalogo.findToDisk(archivio);
             archivio.forEach(System.out::println);

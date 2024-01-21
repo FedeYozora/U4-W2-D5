@@ -4,7 +4,7 @@ public class Libro extends Elemento {
     private static String autore;
     private String genere;
 
-    public Libro(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
+    public Libro(String codiceISBN, String titolo,int numeroPagine, int annoPubblicazione, String autore, String genere) {
         super(codiceISBN, titolo, annoPubblicazione, String.valueOf(numeroPagine));
         this.autore = autore;
         this.genere = genere;
@@ -33,8 +33,8 @@ public class Libro extends Elemento {
                 ", genere='" + genere + '\'' +
                 ", codiceISBN='" + codiceISBN + '\'' +
                 ", titolo='" + titolo + '\'' +
-                ", annoPubblicazione=" + annoPubblicazione +
-                ", numeroPagine=" + numeroPagine +
+                ", annoPubblicazione=" + numeroPagine +
+                ", numeroPagine=" + annoPubblicazione +
                 '}';
     }
 }

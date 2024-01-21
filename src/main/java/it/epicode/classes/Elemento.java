@@ -4,7 +4,7 @@ public abstract class Elemento {
     protected String codiceISBN;
     protected static String titolo;
     protected static int annoPubblicazione;
-    protected String numeroPagine;
+    protected static String numeroPagine;
 
     public Elemento(String codiceISBN, String titolo, int annoPubblicazione, String numeroPagine) {
         this.codiceISBN = codiceISBN;
@@ -41,7 +41,7 @@ public abstract class Elemento {
         return annoPubblicazione;
     }
 
-    public String getNumeroPagine() {
+    public static String getNumeroPagine() {
         return numeroPagine;
     }
 
