@@ -1,16 +1,16 @@
 package it.epicode.classes;
 
 public class Libro extends Elemento {
-    private static String autore;
+    private String autore;
     private String genere;
 
-    public Libro(String codiceISBN, String titolo,int numeroPagine, int annoPubblicazione, String autore, String genere) {
+    public Libro(String codiceISBN, String titolo, int annoPubblicazione, int numeroPagine, String autore, String genere) {
         super(codiceISBN, titolo, annoPubblicazione, String.valueOf(numeroPagine));
         this.autore = autore;
         this.genere = genere;
     }
 
-    public static String getAutore() {
+    public String getAutore() {
         return autore;
     }
 
@@ -18,23 +18,23 @@ public class Libro extends Elemento {
         this.autore = autore;
     }
 
-    public void setGenere(String genere) {
-        this.genere = genere;
-    }
-
     public String getGenere() {
         return genere;
+    }
+
+    public void setGenere(String genere) {
+        this.genere = genere;
     }
 
     @Override
     public String toString() {
         return "Libro{" +
-                "autore='" + autore + '\'' +
-                ", genere='" + genere + '\'' +
-                ", codiceISBN='" + codiceISBN + '\'' +
+                "codiceISBN='" + codiceISBN + '\'' +
                 ", titolo='" + titolo + '\'' +
-                ", annoPubblicazione=" + numeroPagine +
-                ", numeroPagine=" + annoPubblicazione +
+                ", numeroPagine=" + numeroPagine +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", autore='" + autore + '\'' +
+                ", genere='" + genere + '\'' +
                 '}';
     }
 }

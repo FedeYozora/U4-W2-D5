@@ -2,9 +2,9 @@ package it.epicode.classes;
 
 public abstract class Elemento {
     protected String codiceISBN;
-    protected static String titolo;
-    protected static int annoPubblicazione;
-    protected static String numeroPagine;
+    protected String titolo;
+    protected int annoPubblicazione;
+    protected String numeroPagine;
 
     public Elemento(String codiceISBN, String titolo, int annoPubblicazione, String numeroPagine) {
         this.codiceISBN = codiceISBN;
@@ -22,7 +22,7 @@ public abstract class Elemento {
     }
 
     public void setAnnoPubblicazione(int annoPubblicazione) {
-       this.annoPubblicazione = annoPubblicazione;
+        this.annoPubblicazione = annoPubblicazione;
     }
 
     public void setNumeroPagine(String numeroPagine) {
@@ -33,15 +33,15 @@ public abstract class Elemento {
         return codiceISBN;
     }
 
-    public static String getTitolo() {
+    public String getTitolo() {
         return titolo;
     }
 
-    public static int getAnnoPubblicazione() {
+    public int getAnnoPubblicazione() {
         return annoPubblicazione;
     }
 
-    public static String getNumeroPagine() {
+    public String getNumeroPagine() {
         return numeroPagine;
     }
 

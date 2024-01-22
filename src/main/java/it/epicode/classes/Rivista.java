@@ -24,10 +24,10 @@ public class Rivista extends Elemento {
     public String toString() {
         return "Rivista{" +
                 "periodicita=" + periodicita +
-                ", codiceISBN='" + codiceISBN + '\'' +
-                ", titolo='" + titolo + '\'' +
-                ", annoPubblicazione=" + numeroPagine +
-                ", numeroPagine=" + annoPubblicazione +
+                ", codiceISBN='" + getCodiceISBN() + '\'' +
+                ", titolo='" + getTitolo() + '\'' +
+                ", annoPubblicazione=" + getAnnoPubblicazione() +
+                ", numeroPagine=" + getNumeroPagine() +
                 '}';
     }
 }

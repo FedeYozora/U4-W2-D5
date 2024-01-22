@@ -9,53 +9,68 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static it.epicode.Archive.archivio;
-
 public class Catalogo {
+    public static List<Elemento> archivio = new ArrayList<>();
 
-
-
-    // Remove an element from the archive by its ISBN
+    // Rimuovi un elemento dall'archivio in base al suo ISBN
     public static void rimuoviElemento(String isbn) {
-        archivio.removeIf(e -> e.getCodiceISBN().equals(isbn));
+        Iterator<Elemento> iterator = archivio.iterator();
+        while (iterator.hasNext()) {
+            Elemento elemento = iterator.next();
+            if (elemento.getCodiceISBN().equals(isbn)) {
+                iterator.remove();
+                break;
+            }
+        }
     }
 
-    // Search for an element by its ISBN
+    // Ricerca di un elemento nell'archivio usando il suo ISBN
     public static Elemento ricercaPerISBN(String isbn) {
-        if (isbn != null) {
-         archivio.stream()
+        Optional<Elemento> optionalElemento = archivio.stream()
                 .filter(e -> e.getCodiceISBN().equals(isbn))
                 .findFirst();
 
-            System.out.println("Titolo: " + Elemento.getTitolo());
-            System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
+        if (optionalElemento.isPresent()) {
+            Elemento elemento = optionalElemento.get();
+            System.out.println("Titolo: " + elemento.getTitolo());
+            System.out.println("Anno di pubblicazione: " + elemento.getAnnoPubblicazione());
+            return elemento;
         } else {
             System.out.println("Elemento non trovato.");
+            return null;
         }
-        return null;
     }
 
-    // Search for elements by their year of publication
+    // Ricerca nell'archivio di un elemento in base all'anno di pubblicazione
     public static List<Elemento> ricercaPerAnnoPubblicazione(int year) {
-         archivio.stream()
+        List<Elemento> filteredElements = archivio.stream()
                 .filter(e -> e.getAnnoPubblicazione() == year)
                 .collect(Collectors.toList());
-        System.out.println("Titolo: " + Elemento.getTitolo());
-        System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
-        return null;
+
+        for (Elemento elemento : filteredElements) {
+            System.out.println("Titolo: " + elemento.getTitolo());
+            System.out.println("Anno di pubblicazione: " + elemento.getAnnoPubblicazione());
+        }
+
+        return filteredElements;
     }
 
-    // Search for elements by their author
+    // Ricerca nell'archivio in base all'autore
     public static List<Elemento> ricercaPerAutore(String author) {
-         archivio.stream()
-                .filter(e -> e instanceof Libro && Libro.getAutore().equals(author))
+        List<Elemento> filteredElements = archivio.stream()
+                .filter(e -> e instanceof Libro && ((Libro) e).getAutore().equals(author))
                 .collect(Collectors.toList());
-        System.out.println("Titolo: " + Elemento.getTitolo());
-        System.out.println("Anno di pubblicazione: " + Elemento.getNumeroPagine());
-        System.out.println("Autore: " + Libro.getAutore());
-        return null;
+
+        for (Elemento elemento : filteredElements) {
+            System.out.println("Titolo: " + elemento.getTitolo());
+            System.out.println("Anno di pubblicazione: " + elemento.getAnnoPubblicazione());
+            System.out.println("Autore: " + ((Libro) elemento).getAutore());
+        }
+
+        return filteredElements;
     }
-        public static void saveToDisk(List<Elemento> elements) throws IOException {
+
+    public static void saveToDisk(List<Elemento> elements) throws IOException {
         StringBuilder toWrite = new StringBuilder();
 
         for (Elemento element : elements) {
@@ -67,15 +82,13 @@ public class Catalogo {
             }
             if (element instanceof Rivista) {
                 str.append(((Rivista) element).getPeriodicita());
-
             }
 
             toWrite.append(element.getCodiceISBN()).append("@")
                     .append(element.getTitolo()).append("@")
                     .append(element.getAnnoPubblicazione()).append("@")
                     .append(element.getNumeroPagine()).append("@")
-                    .append(str)
-                    .append("#");
+                    .append(str).append("#");
         }
 
         File file = new File("prova.txt");
@@ -86,17 +99,17 @@ public class Catalogo {
 
     public static List<Elemento> findToDisk(List<Elemento> archivio) throws IOException {
         archivio.clear();
-    File file = new File("prova.txt");
-    String fileString = FileUtils.readFileToString(file, "UTF-8");
-    List<String> splitElementString = Arrays.asList(fileString.split("#"));
+        File file = new File("prova.txt");
+        String fileString = FileUtils.readFileToString(file, "UTF-8");
+        List<String> splitElementString = Arrays.asList(fileString.split("#"));
 
-    splitElementString.stream().forEach(stringa -> {
-        String[] productInfos = stringa.split("@");
-        if (productInfos.length == 6) {
+        splitElementString.stream().forEach(stringa -> {
+            String[] productInfos = stringa.split("@");
+            if (productInfos.length == 6) {
             String codiceISBN = productInfos[0];
             String titolo = productInfos[1];
-            int annoPubblicazione = Integer.parseInt(productInfos[3]);
-            int numPagine = Integer.parseInt(productInfos[2]);
+            int annoPubblicazione = Integer.parseInt(productInfos[2]);
+            int numPagine = Integer.parseInt(productInfos[3]);
             String autore = "";
             String genere = "";
             if (productInfos[4].contains("@")) {
